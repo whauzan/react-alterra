@@ -42,7 +42,7 @@ export default function Navbar() {
                             target="_blank"
                             href="contact_us.html"
                         >
-                            About
+                            Contact
                         </Link>
                     </div>
                 </div>
