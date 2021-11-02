@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import profile from '../assets/img/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg'
 
 export default function HomeBody() {
@@ -11,12 +12,18 @@ export default function HomeBody() {
                         <img src={profile} width={355} alt="" className="img-circle"/>
                     </div>
                     <div className="col-lg-6 text">
-                        <div className="content mb-5 mt-3">
+                        <div className="content mb-5">
                             <h4>Hi, my name is</h4>
                             <h1>Anne Sullivan</h1>
                             <h2>I build things for the web</h2>
                             <button className="btn btn-primary mt-3">
-                                <a href="contact_us.html" target="blank">Get In Touch</a>
+                                <Link
+                                    to="/contact_us"
+                                    target="_blank"
+                                    href="contact_us.html"
+                                >
+                                    Get In Touch
+                                </Link>
                             </button>
                         </div>
                     </div>

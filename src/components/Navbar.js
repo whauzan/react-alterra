@@ -39,6 +39,7 @@ export default function Navbar() {
                         <Link 
                             to="/contact_us"
                             className="nav-link"
+                            target="_blank"
                             href="contact_us.html"
                         >
                             About
