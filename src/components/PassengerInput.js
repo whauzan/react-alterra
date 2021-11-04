@@ -58,7 +58,7 @@ class PassengerInput extends Component {
         }
 
         return (
-            <div>
+            <div style={{marginTop: "20px"}}>
                 <div onSubmit={() => {}} style={viewMode}>
                     <p>Masukkan Nama Anda</p>
                     <input type="text" placeholder="Nama anda..." value={this.state.nama} name="nama" onChange={this.onChange}></input>
