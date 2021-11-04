@@ -1,0 +1,17 @@
+.completed {
+    text-decoration: line-through;
+}
+
+.todo_form {
+    margin: 10px auto;
+}
+
+.delete_button {
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.checkbox {
+    margin-right: 10px;
+}

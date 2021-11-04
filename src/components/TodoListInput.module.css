@@ -1,0 +1,12 @@
+.todo {
+    align-self: center;
+}
+
+.todo_input, .todo_submit {
+    margin: auto;
+}
+
+.todo_submit {
+    margin-left: 10px;
+    border-radius: 10px;
+}
