@@ -1,31 +1,32 @@
-import { Component } from "react";
+import { useState } from "react"
 
-class PassengerInput extends Component {
-    state = {
+function PassengerInput() {
+    const [data, setData] = useState({
         nama : "",
         umur : "",
-        jenisKelamin : "Pria",
-        editing : true
-    }
+        jenisKelamin : "Pria"
+    })
 
-    onChange = e => {
-        this.setState({
+    const [editing, setEditing] = useState(true)
+
+    const onChange = e => {
+        setData({...data,
             [e.target.name] : e.target.value
         })
     }
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        const formIsNotEmpty = this.state.nama && this.state.umur && this.state.jenisKelamin
+        const formIsNotEmpty = data.nama && data.umur && data.jenisKelamin
         if (formIsNotEmpty) {
             const newData = {
-                nama : this.state.nama,
-                umur : this.state.umur,
-                jenisKelamin : this.state.jenisKelamin
+                nama : data.nama,
+                umur : data.umur,
+                jenisKelamin : data.jenisKelamin
             }
 
-            this.props.tambahPengunjung(newData)
-            this.setState({
+            props.tambahPengunjung(newData)
+            setData({
                 nama : "",
                 umur : "",
                 jenisKelamin : "Pria"
@@ -51,7 +52,7 @@ class PassengerInput extends Component {
         const viewMode = {};
         const editMode = {};
 
-        if (this.state.editing) {
+        if (data.editing) {
             viewMode.display = "none";
         } else {
             editMode.display = "none";
@@ -61,10 +62,10 @@ class PassengerInput extends Component {
             <div style={{marginTop: "20px"}}>
                 <div onSubmit={() => {}} style={viewMode}>
                     <p>Masukkan Nama Anda</p>
-                    <input type="text" placeholder="Nama anda..." value={this.state.nama} name="nama" onChange={this.onChange}></input>
+                    <input type="text" placeholder="Nama anda..." value={data.nama} name="nama" onChange={this.onChange}></input>
 
                     <p>Masukkan Umur Anda</p>
-                    <input type="number" placeholder="Umur anda..." value={this.state.umur} name="umur" onChange={this.onChange}></input>
+                    <input type="number" placeholder="Umur anda..." value={data.umur} name="umur" onChange={this.onChange}></input>
 
                     <p>Masukkan Jenis Kelamin Anda</p>
                     <select onChange={this.onChange} name="jenisKelamin">
