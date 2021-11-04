@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function PassengerInput() {
+function PassengerInput(props) {
     const [data, setData] = useState({
         nama : "",
         umur : "",
@@ -36,50 +36,44 @@ function PassengerInput() {
         }
     }
 
-    handleBukaInput = () => {
-        this.setState({
-            editing : false
-        })
+    const handleBukaInput = () => {
+        setEditing(false)
     }
 
-    handleTutupInput = () => {
-        this.setState({
-            editing : true
-        })
+    const handleTutupInput = () => {
+        setEditing(true)
     }
 
-    render() {
-        const viewMode = {};
-        const editMode = {};
+    const viewMode = {};
+    const editMode = {};
 
-        if (data.editing) {
-            viewMode.display = "none";
-        } else {
-            editMode.display = "none";
-        }
+    if (editing) {
+        viewMode.display = "none";
+    } else {
+        editMode.display = "none";
+    }
 
-        return (
-            <div style={{marginTop: "20px"}}>
-                <div onSubmit={() => {}} style={viewMode}>
-                    <p>Masukkan Nama Anda</p>
-                    <input type="text" placeholder="Nama anda..." value={data.nama} name="nama" onChange={this.onChange}></input>
+    return (
+        <div style={{marginTop: "20px"}}>
+            <div onSubmit={() => {}} style={viewMode}>
+                <p>Masukkan Nama Anda</p>
+                <input type="text" placeholder="Nama anda..." value={data.nama} name="nama" onChange={onChange}></input>
 
-                    <p>Masukkan Umur Anda</p>
-                    <input type="number" placeholder="Umur anda..." value={data.umur} name="umur" onChange={this.onChange}></input>
+                <p>Masukkan Umur Anda</p>
+                <input type="number" placeholder="Umur anda..." value={data.umur} name="umur" onChange={onChange}></input>
 
-                    <p>Masukkan Jenis Kelamin Anda</p>
-                    <select onChange={this.onChange} name="jenisKelamin">
-                        <option value="Pria" selected>Pria</option>
-                        <option value="Wanita">Wanita</option>
-                    </select>
+                <p>Masukkan Jenis Kelamin Anda</p>
+                <select onChange={onChange} name="jenisKelamin">
+                    <option value="Pria" selected>Pria</option>
+                    <option value="Wanita">Wanita</option>
+                </select>
 
-                    <button onClick={this.handleSubmit}>Submit</button>
-                    <button onClick={this.handleTutupInput}>Selesai</button>
-                </div>
-                <button onClick={this.handleBukaInput} style={editMode}>Masukkan Nama Penumpang</button>
+                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleTutupInput}>Selesai</button>
             </div>
-        )
-    }
+            <button onClick={handleBukaInput} style={editMode}>Masukkan Nama Penumpang</button>
+        </div>
+    )
 }
 
 export default PassengerInput
