@@ -1,51 +1,44 @@
-import { Component } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid"
 import TodoList from "./TodoList";
 import TodoListInput from "./TodoListInput";
 
-class Home extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            data : [
-                {
-                    id : uuidv4(),
-                    task : "Makan Mie",
-                    completed : false
-                },
-                {
-                    id : uuidv4(),
-                    task : "Makan Ayam",
-                    completed : true
-                }
-            ]
-        }
+const initialValue = [
+    {
+        id : uuidv4(),
+        task : "Makan Mie",
+        completed : false
+    },
+    {
+        id : uuidv4(),
+        task : "Makan Ayam",
+        completed : true
+    }
+]
+
+function Home() {
+    const [data, setData] = useState(initialValue)
+
+    const deleteTodo = (id) => {
+        setData((oldData) => oldData.filter((item) => item.id !== id))
     }
 
-    deleteTodo = (id) => {
-        const newListPengunjung = this.state.data.filter((item) => item.id !== id)
-        this.setState({data : newListPengunjung})
-    }
-
-    addTodo = (newUser) => {
+    const addTodo = (newUser) => {
         const newPengunjung = {id : uuidv4(), ...newUser}
-        this.setState({data : [...this.state.data, newPengunjung]})
+        setData((oldData) => [...oldData, newPengunjung])
     }
 
-    toggleComplete = (id) => {
-        const complete = this.state.data.map((item)=> item.id === id ? { ...item, completed: !item.completed} : item)
-        this.setState({data : complete})
+    const toggleComplete = (id) => {
+        setData((oldData) => oldData.map((item)=> item.id === id ? { ...item, completed: !item.completed} : item))
     }
 
-    render() {
-        return (
-            <div>
-                <TodoListInput addTodo={this.addTodo}/>
-                <TodoList data={this.state.data} deleteTodo={this.deleteTodo} toggleComplete={this.toggleComplete}/>
-                {/* <TodoList data={this.state.data} hapusPengunjung={this.hapusPengunjung} sudahSelesai={this.sudahSelesai} belumSelesai={this.belumSelesai}/> */}
-            </div>
-        )
-    }
+    return (
+        <div>
+            <TodoListInput addTodo={addTodo}/>
+            <TodoList data={data} deleteTodo={deleteTodo} toggleComplete={toggleComplete}/>
+            {/* <TodoList data={this.state.data} hapusPengunjung={this.hapusPengunjung} sudahSelesai={this.sudahSelesai} belumSelesai={this.belumSelesai}/> */}
+        </div>
+    )
 }
 
 export default Home

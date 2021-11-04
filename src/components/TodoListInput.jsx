@@ -1,29 +1,29 @@
-import { Component } from "react";
+import { useState } from "react"
 import styles from "./TodoListInput.module.css"
 
-class TodoListInput extends Component {
-    state = {
+function TodoListInput(props) {
+    const [data, setData] = useState({
         task : "",
         completed : false
-    }
+    })
 
-    onChange = e => {
-        this.setState({
+    const onChange = e => {
+        setData({...data,
             [e.target.name] : e.target.value
         })
     }
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
-        const formIsNotEmpty = this.state.task
+        const formIsNotEmpty = data.task
         if (formIsNotEmpty) {
             const newData = {
-                task : this.state.task,
-                completed : this.state.completed
+                task : data.task,
+                completed : data.completed
             }
 
-            this.props.addTodo(newData)
-            this.setState({
+            props.addTodo(newData)
+            setData({
                 task : "",
                 completed : false
             })
@@ -32,25 +32,23 @@ class TodoListInput extends Component {
         }
     }
 
-    render() {
-        return (
-            <div className={styles.todo}>
-                <input className={styles.todo_input}
-                    type="text"
-                    placeholder="Add Todo"
-                    value={this.state.task}
-                    name="task"
-                    onChange={this.onChange}>
-                </input>
-                <button className={styles.todo_submit}
-                    onClick={this.handleSubmit}
-                    disabled={this.state.task.length < 1}
-                >
-                    Submit
-                </button>
-            </div>
-        )
-    }
+    return (
+        <div className={styles.todo}>
+            <input className={styles.todo_input}
+                type="text"
+                placeholder="Add Todo"
+                value={data.task}
+                name="task"
+                onChange={onChange}>
+            </input>
+            <button className={styles.todo_submit}
+                onClick={handleSubmit}
+                disabled={data.task.length < 1}
+            >
+                Submit
+            </button>
+        </div>
+    )
 }
 
 export default TodoListInput
