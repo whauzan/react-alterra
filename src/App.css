@@ -22,3 +22,40 @@
   box-shadow: 3px 6px 40px #000;
   margin-bottom: 10px;
 }
+
+.about-wrapper {
+  background-color: #12343b;
+  width: 550px;
+  min-height: 250px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 3px 6px 40px #000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.about-wrapper h1, .about-wrapper p {
+  margin-bottom: 20px;
+  color: #eaecef;
+}
+
+.btn {
+  padding: 10px;
+  color: #eaecef;
+  width: 136px;
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #c89666;
+  border: 1px solid transparent;
+}

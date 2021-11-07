@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid"
-import TodoList from "./TodoList";
-import TodoListInput from "./TodoListInput";
+import '../App.css';
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import TodoList from "../components/TodoList";
+import TodoListInput from "../components/TodoListInput";
 
 const initialValue = [
     {
@@ -33,11 +36,15 @@ function Home() {
     }
 
     return (
-        <div>
-            <TodoListInput addTodo={addTodo}/>
-            <TodoList data={data} deleteTodo={deleteTodo} toggleComplete={toggleComplete}/>
-            {/* <TodoList data={this.state.data} hapusPengunjung={this.hapusPengunjung} sudahSelesai={this.sudahSelesai} belumSelesai={this.belumSelesai}/> */}
-        </div>
+        <>
+            <Navbar/>
+            <div className="app-wrapper">
+                <Header/>
+                <TodoListInput addTodo={addTodo}/>
+                <TodoList data={data} deleteTodo={deleteTodo} toggleComplete={toggleComplete}/>
+                {/* <TodoList data={this.state.data} hapusPengunjung={this.hapusPengunjung} sudahSelesai={this.sudahSelesai} belumSelesai={this.belumSelesai}/> */}
+            </div>
+        </>
     )
 }
 

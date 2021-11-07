@@ -1,0 +1,49 @@
+* {
+  box-sizing: content-box;
+}
+
+.err {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: linear-gradient(to right bottom, #e1b382, #c89666);
+  font-family: "Open Sans";
+}
+
+.message {
+  font-weight: 800;
+  color: #383a41;
+  text-align: center;
+  font-size: 2.5em;
+  padding-top: 20px;
+}
+
+.btn {
+  font-family: "Open Sans";
+  font-weight: 400;
+  padding: 20px;
+  background-color: #5e7fdc;
+  color: white;
+  width: 125px;
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  transition: all 0.2s linear;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: rgba(94, 127, 220, 0.8);
+  transition: all 0.2s linear;
+}
+
+.err_img {
+  display: flex;
+  margin: 0 auto;
+}
