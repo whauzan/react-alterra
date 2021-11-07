@@ -33,21 +33,21 @@ function TodoListInput(props) {
     }
 
     return (
-        <div className={styles.todo}>
-            <input className={styles.todo_input}
-                type="text"
+        <form>
+            <input type="text" 
                 placeholder="Add Todo"
                 value={data.task}
                 name="task"
-                onChange={onChange}>
-            </input>
-            <button className={styles.todo_submit}
+                onChange={onChange}
+                className={styles.task_input}
+            />
+            <button className={styles.button_add}
                 onClick={handleSubmit}
-                disabled={data.task.length < 1}
+                // disabled={data.task.length < 1}
             >
-                Submit
+                Add
             </button>
-        </div>
+        </form>
     )
 }
 

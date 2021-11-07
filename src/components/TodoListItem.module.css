@@ -1,17 +1,50 @@
-.completed {
-    text-decoration: line-through;
-}
-
-.todo_form {
-    margin: 10px auto;
-}
-
-.delete_button {
-    cursor: pointer;
+.list_item {
+    display: flex;
+    margin: 20px 0;
     border-radius: 10px;
-    margin-left: 10px;
+    padding: 10px;
+    max-height: 30px;
+    border: 1px solid white;
 }
 
-.checkbox {
-    margin-right: 10px;
+.list {
+    width: 220px;
+    background-color: #12343b;
+    border: none;
+    color: #ccc;
+    font-size: 20px;
+    padding-left: 10px;
+    margin-right: 55px;
+}
+
+.complete {
+    width: 220px;
+    background-color: #12343b;
+    border: none;
+    color: #ccc;
+    font-size: 20px;
+    padding-left: 10px;
+    margin-right: 55px;
+    text-decoration-style: solid;
+    text-decoration-line: line-through;
+    text-decoration-color: #ff6c6c;
+    opacity: 0.6;
+}
+
+.button_complete, .button_delete {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 28px;
+    border-radius: 50%;
+}
+
+.button_complete {
+    color: #ff6c6c;
+    margin-right: 20px;
+}
+
+.button_delete {
+    color: lightseagreen;
 }
