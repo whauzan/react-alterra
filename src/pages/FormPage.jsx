@@ -37,6 +37,7 @@ function FormPage() {
     const fotoSampul = useRef(null);
 
     const handleSubmit = (e) => {
+        console.log(errMsg);
         if (errMsg !== "") {
             alert("Terdapat data yang tidak sesuai")
         } else {
@@ -45,17 +46,23 @@ function FormPage() {
         e.preventDefault();
     }
 
+    const resetData = () => {
+        console.log(errMsg);
+        setData(initialData)
+        setErrMsg("")
+    }
+
     return (
         <>
             <h1 style={{"textAlign":"center"}}>Formulir Buku Baru</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     Judul:
-                    <input type="text" name="judul" onChange={handleInput} value={data.judul} className={styles.input}/>
+                    <input type="text" name="judul" onChange={handleInput} value={data.judul} className={styles.input} required/>
                 </label>
                 <label>
                     Pengarang:
-                    <input type="text" name="pengarang" onChange={handleInput} value={data.pengarang} className={styles.input}/>
+                    <input type="text" name="pengarang" onChange={handleInput} value={data.pengarang} className={styles.input} required/>
                 </label>
                 <label>
                     Cetakan:
@@ -77,8 +84,9 @@ function FormPage() {
                     Foto Sampul:
                     <input type="file" ref={fotoSampul} className={styles.input}/>
                 </label>
-                <input type="submit" value="Submit" className={styles.btn}/>
-                <button className={styles.btn}>Reset</button>
+                {errMsg}
+                <input type="submit" value="Submit" className={styles.btn} onClick={handleSubmit}/>
+                <button className={styles.btn} onClick={resetData}>Reset</button>
             </form>
         </>
     )
