@@ -1,10 +1,14 @@
 import TodoListItem from "./TodoListItem"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteTodo, toggleComplete } from "../store/sliceTodo"
 
-const TodoList = (props) => {
-    const {data, deleteTodo, toggleComplete} = props
+const TodoList = () => {
+    const todos = useSelector((state) => state.todo.todos)
+    const dispatch = useDispatch()
+
     return (
         <div>
-            {data.map((todo) => <TodoListItem key={todo.id} item ={todo} deleteTodo={deleteTodo} toggleComplete={toggleComplete}/>)}
+            {todos.map((item) => <TodoListItem key={item.id} item ={item} deleteTodo={() => {dispatch(deleteTodo(item.id))}} toggleComplete={() => {dispatch(toggleComplete(item.id))}}/>)}
         </div>
     )
 }

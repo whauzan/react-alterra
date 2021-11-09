@@ -1,7 +1,11 @@
 import { useState } from "react"
 import styles from "./TodoListInput.module.css"
+import { useDispatch } from "react-redux"
+import { addTodo } from "../store/sliceTodo"
 
 function TodoListInput(props) {
+    const dispatch = useDispatch()
+
     const [data, setData] = useState({
         task : "",
         completed : false
@@ -22,7 +26,7 @@ function TodoListInput(props) {
                 completed : data.completed
             }
 
-            props.addTodo(newData)
+            dispatch(addTodo(newData))
             setData({
                 task : "",
                 completed : false
