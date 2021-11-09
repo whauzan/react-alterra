@@ -115,12 +115,12 @@ function FormPage() {
                     No Handphone:
                     <input type="number" name="noHandphone" onChange={handleInput} value={data.noHandphone} className={styles.input} required/>
                 </label>
-                <label>
-                    Latar Belakang Pendidikan:
+                <label className={styles.input}>
+                    Latar Belakang Pendidikan: <br />
                     <input type="radio" name="pendidikan" onChange={handleInput} value="IT" required/>
-                    <label>IT</label>
+                    <label className={styles.input}>IT</label>
                     <input type="radio" name="pendidikan" onChange={handleInput} value="Non-IT" />
-                    <label>Non-IT</label>
+                    <label className={styles.input}>Non-IT</label>
                 </label>
                 <label>
                     Kelas Coding yang Dipilih:
@@ -143,9 +143,10 @@ function FormPage() {
                     <li style={errMsg.email ? {color : 'red'} : {display:'none'}}>{errMsg.email}</li>
                     <li style={errMsg.noHandphone ? {color : 'red'} : {display:'none'}}>{errMsg.noHandphone}</li>
                 </ul>
-                
-                <input type="submit" value="Submit" onSubmit={handleSubmit} className={styles.btn}/>
-                <button className={styles.btn} onClick={resetData}>Reset</button>
+                <div className={styles.btn_container}>
+                    <input type="submit" value="Submit" onSubmit={handleSubmit} className={styles.btn}/>
+                    <button className={styles.btn} onClick={resetData}>Reset</button>
+                </div>
             </form>
         </>
     )

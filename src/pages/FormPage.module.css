@@ -20,6 +20,13 @@ label {
     letter-spacing: 1px;
 }
 
+.btn_container {
+    margin-left: 10px;
+}
+
 .btn {
-    flex-direction: row;
+    border-radius: 10px;
+    width: 100px;
+    margin-right: 20px;
+    cursor: pointer;
 }
