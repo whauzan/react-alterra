@@ -6,44 +6,91 @@ function FormPage() {
         namaLengkap : "",
         email : "",
         noHandphone : "",
-        tahunTerbit : 0,
-        kotaTerbit : "",
-        harga : 0,
+        pendidikan : "",
+        kelas : "",
+        harapan : "",
+    }
+
+    const initialError = {
+        nama : "",
+        email : "",
+        noHandphone : "",
     }
 
     const [data, setData] = useState(initialData);
     const regex = /^[A-Za-z ]*$/;
-    const [errMsg, setErrMsg] = useState("")
+    const emailRegex = /\S+@\S+\.\S+/;
+    const [errMsg, setErrMsg] = useState(initialError);
+    const fotoSampul = useRef(null);
 
-    const handleInput = e => {
+    const handleInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
 
         if (name === "namaLengkap") {
             if (regex.test(value)) {
-                setErrMsg("")
+                errMsg.nama = ""
             } else {
-                setErrMsg("Nama Lengkap Harus Berupa Huruf")
+                errMsg.nama = "Nama Lengkap Harus Berupa Huruf"
             }
+            // setErrMsg(errMsg)
         }
 
+        if (name === "email") {
+            if (emailRegex.test(value)) {
+                errMsg.email = ""
+            } else {
+                errMsg.email = "Email Tidak Sesuai"
+            }
+            // setErrMsg(errMsg)
+        }
+
+        if (name === "noHandphone") {
+            if (value.length >= 9 && value.length <= 14) {
+                errMsg.noHandphone = ""
+            } else {
+                errMsg.noHandphone = "No Handphone Tidak Sesuai"
+            }
+            
+        }
+
+        setErrMsg(errMsg)
         setData({
             ...data,
             [name] : value
         })
-        console.log("data", data);
+        // console.log("data", data);
     }
 
-    const fotoSampul = useRef(null);
+    // const handleRadio = (e) => {
+    //     const name = e.target.name;
+    //     const value = e.target.value;
+
+    //     setData({
+    //         ...data,
+    //         [name] : value
+    //     })
+    // }
+
+    // const handleSelect = (e) => {
+    //     const name = e.target.name;
+    //     const value = e.target.value;
+
+    //     setData({
+    //         ...data,
+    //         [name] : value
+    //     })
+    // }
 
     const handleSubmit = (e) => {
         console.log(errMsg);
-        if (errMsg !== "") {
+        if (errMsg.nama !== "" || errMsg.email !== "" || errMsg.noHandphone !== "") {
             alert("Terdapat data yang tidak sesuai")
+            e.preventDefault();
         } else {
             alert(`Data Pendaftar "${data.namaLengkap}" Berhasil Diterima`)
-        }
-        e.preventDefault();
+            setData(initialData)
+        }   
     }
 
     const resetData = () => {
@@ -66,32 +113,38 @@ function FormPage() {
                 </label>
                 <label>
                     No Handphone:
-                    <input type="number" name="noHandphone" onChange={handleInput} value={data.noHandphone} className={styles.input}/>
+                    <input type="number" name="noHandphone" onChange={handleInput} value={data.noHandphone} className={styles.input} required/>
                 </label>
                 <label>
                     Latar Belakang Pendidikan:
-                    <input type="radio" name="tahunTerbit" onChange={handleInput} value={data.tahunTerbit} />
+                    <input type="radio" name="pendidikan" onChange={handleInput} value="IT" required/>
                     <label>IT</label>
-                    <input type="radio" name="tahunTerbit" onChange={handleInput} value={data.tahunTerbit} />
+                    <input type="radio" name="pendidikan" onChange={handleInput} value="Non-IT" />
                     <label>Non-IT</label>
                 </label>
                 <label>
                     Kelas Coding yang Dipilih:
-                    <select type="text" name="kotaTerbit" onChange={handleInput} value={data.kotaTerbit} className={styles.input}>
-                        <option>Coding BackEnd with Golang</option>
-                        <option>Coding FrontEnd with ReactJS</option>
-                        <option>Fullstack Developer</option>
+                    <select type="text" name="kelas" onChange={handleInput} value={data.kelas} className={styles.input} required>
+                        <option value="">Pilih Salah Satu Program</option>
+                        <option value="Coding BackEnd with Golang" required>Coding BackEnd with Golang</option>
+                        <option value="Coding FrontEnd with ReactJS">Coding FrontEnd with ReactJS</option>
+                        <option value="Fullstack Developer">Fullstack Developer</option>
                     </select>
                 </label>
                 <label>
                     Foto Surat Kesungguhan:
-                    <input type="file" ref={fotoSampul} className={styles.input}/>
+                    <input type="file" ref={fotoSampul} className={styles.input} required/>
                 </label>
                 <label>Harapan Untuk Coding Bootcamp ini:
-                    <textarea name="" id="" cols="30" rows="5" className={styles.input}></textarea>
+                    <textarea name="harapan" cols="30" rows="5" value={data.harapan} onChange={handleInput} className={styles.input}></textarea>
                 </label>
-                {errMsg}
-                <input type="submit" value="Submit" className={styles.btn}/>
+                <ul>
+                    <li style={errMsg.nama ? {color : 'red'} : {display:'none'}}>{errMsg.nama}</li>
+                    <li style={errMsg.email ? {color : 'red'} : {display:'none'}}>{errMsg.email}</li>
+                    <li style={errMsg.noHandphone ? {color : 'red'} : {display:'none'}}>{errMsg.noHandphone}</li>
+                </ul>
+                
+                <input type="submit" value="Submit" onSubmit={handleSubmit} className={styles.btn}/>
                 <button className={styles.btn} onClick={resetData}>Reset</button>
             </form>
         </>
