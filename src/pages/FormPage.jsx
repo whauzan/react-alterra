@@ -96,7 +96,7 @@ function FormPage() {
     const resetData = () => {
         console.log(errMsg);
         setData(initialData)
-        setErrMsg("")
+        setErrMsg(initialError)
     }
 
     return (
