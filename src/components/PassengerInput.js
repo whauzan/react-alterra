@@ -1,6 +1,10 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { tambahPengunjung } from "../store/passengerSlice"
 
-function PassengerInput(props) {
+function PassengerInput() {
+    const dispatch = useDispatch()
+
     const [data, setData] = useState({
         nama : "",
         umur : "",
@@ -25,7 +29,7 @@ function PassengerInput(props) {
                 jenisKelamin : data.jenisKelamin
             }
 
-            props.tambahPengunjung(newData)
+            dispatch(tambahPengunjung(newData))
             setData({
                 nama : "",
                 umur : "",
@@ -68,8 +72,10 @@ function PassengerInput(props) {
                     <option value="Wanita">Wanita</option>
                 </select>
 
-                <button onClick={handleSubmit}>Submit</button>
-                <button onClick={handleTutupInput}>Selesai</button>
+                <div style={{marginTop: "30px"}}>
+                    <button onClick={handleSubmit} style={{marginRight: "5px"}}>Submit</button>
+                    <button onClick={handleTutupInput} style={{marginLeft: "5px"}}>Selesai</button>
+                </div>
             </div>
             <button onClick={handleBukaInput} style={editMode}>Masukkan Nama Penumpang</button>
         </div>

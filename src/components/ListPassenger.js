@@ -1,8 +1,11 @@
+import { useDispatch, useSelector } from "react-redux"
+import { hapusPengunjung } from "../store/passengerSlice"
 import ListItem from "./ListItem"
 
-const ListPassenger = (props) => {
-    const {data, hapusPengunjung} = props
-    
+const ListPassenger = () => {
+    const passengers = useSelector((state) => state.passenger.passengers)
+    const dispatch = useDispatch()
+
     return (
         <div>
             <h1>Daftar Pengunjung</h1>
@@ -13,9 +16,7 @@ const ListPassenger = (props) => {
                     <td style={{border: "1px solid black"}}>Umur</td>
                     <td style={{border: "1px solid black"}}>Jenis Kelamin</td>
                 </thead>
-                <tbody>
-                    {data.map((passenger) => <ListItem key={passenger.id} item ={passenger} hapusPengunjung={hapusPengunjung}/>)}
-                </tbody>
+                {passengers.map((item) => <ListItem key={item.id} item ={item} hapusPengunjung={() => {dispatch(hapusPengunjung(item.id))}}/>)}
             </table>
         </div>
     )
