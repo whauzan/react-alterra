@@ -1,11 +1,11 @@
 import './App.css';
-import FormPage from './pages/Form/FormPage';
+import FormCoding from './pages/Form/FormCoding'
 import Search from './pages/Form/Search';
 
 function App() {
   return (
     <div className="App">
-      <FormPage />
+      <FormCoding />
       <Search />
     </div>
   );
