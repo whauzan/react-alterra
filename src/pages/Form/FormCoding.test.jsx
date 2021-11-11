@@ -65,28 +65,36 @@ describe('FormPage', () => {
     expect(screen.getByLabelText(/Email/)).toHaveValue('emailmail.com');
   });
 
-  // test('submit button with ideal value', () => {
-  //   render(<FormCoding />);
+  test('submit button with ideal value', () => {
+    render(<FormCoding />);
     
-  //   jest.spyOn(window, 'alert').mockImplementation(() => {});
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
     
-  //   fireEvent.input(screen.getByRole("textbox", { name: /nama/i }), {
-  //     target: { value: 'Wahyu' },
-  //   });
+    fireEvent.input(screen.getByRole("textbox", { name: /nama/i }), {
+      target: { value: 'Wahyu' },
+    });
     
-  //   fireEvent.input(screen.getByRole("textbox", { name: /email/i }), {
-  //     target: { value: 'Wahyu@mail.com' },
-  //   });
+    fireEvent.input(screen.getByRole("textbox", { name: /email/i }), {
+      target: { value: 'Wahyu@mail.com' },
+    });
     
-  //   fireEvent.input(screen.getByRole("spinbutton", { name: /noHandphone/i }), {
-  //     target: { value: 123456789 },
-  //   });
+    fireEvent.input(screen.getByRole("spinbutton", { name: /no Handphone/i }), {
+      target: { value: 123456789 },
+    });
     
-  //   fireEvent.submit(screen.getByText("Submit"))
+    // fireEvent.input(screen.getByTestId("noHandphone"), {
+    //   target: { value: 123456789 },
+    // });
+
+    expect(screen.getByLabelText(/Nama/)).toHaveValue('Wahyu');
+    expect(screen.getByLabelText(/Email/)).toHaveValue('Wahyu@mail.com');
+    expect(screen.getByLabelText(/No Handphone/)).toHaveValue(123456789);
+
+    fireEvent.submit(screen.getByText("Submit"))
+    expect(window.alert).toBeCalledWith(`Data Pendaftar "Wahyu" Berhasil Diterima`);
     
-  //   expect(window.alert).toBeCalledWith(`Data Pendaftar "Wahyu" Berhasil Diterima`);
-  //   expect(screen.getByLabelText(/Nama/)).toHaveValue('Wahyu');
-  //   expect(screen.getByLabelText(/Email/)).toHaveValue('Wahyu@mail.com');
-  //   expect(screen.getByLabelText(/No Handphone/)).toHaveValue(123456789);
-  // });
+    expect(screen.getByLabelText(/Nama/)).toHaveValue('');
+    expect(screen.getByLabelText(/Email/)).toHaveValue('');
+    expect(screen.getByLabelText(/No Handphone/)).toHaveValue(null);
+  });
 });

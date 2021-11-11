@@ -97,6 +97,7 @@ export default function NameForm() {
         <input
           type="number"
           name="noHandphone"
+          data-testid="noHandphone"
           value={data.noHandphone}
           onChange={handleChange}
         />
