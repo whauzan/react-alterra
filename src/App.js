@@ -4,7 +4,7 @@ import { Home, ContactUs, ReviewMessage, News, NotFound } from './Pages'
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 // import { store, persistor } from './Redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
   return (
