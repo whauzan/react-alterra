@@ -2,14 +2,20 @@ import React from 'react'
 import styles from './ReviewMessage.module.css'
 import { useNavigate } from 'react-router'
 import { Footer } from '../../Components';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteData } from '../../Redux/reducer';
 
 function ReviewMessage() {
-    const nama = JSON.parse(localStorage.getItem("nama"));
-	const email = JSON.parse(localStorage.getItem("email"));
-	const phone = JSON.parse(localStorage.getItem("phone"));
-	const nationality = JSON.parse(localStorage.getItem("nationality"));
-	const message = JSON.parse(localStorage.getItem("message"));
+	const form = useSelector((state) => state.form.forms);
+	console.log(form);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const handleClose = (e) => {
+		e.preventDefault();
+		dispatch(deleteData());
+		navigate("/");
+	}
 	return (
 		<div>
 			<div className={`${styles.container} container card p-5 position-absolute top-50 start-50 translate-middle w-50`}>
@@ -21,7 +27,7 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="fullname">
-							{nama}
+							{form.nama}
 						</p>
 					</div>
 				</div>
@@ -33,7 +39,7 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="email">
-							{email}
+							{form.email}
 						</p>
 					</div>
 				</div>
@@ -45,7 +51,7 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="phone">
-							{phone}
+							{form.phone}
 						</p>
 					</div>
 				</div>
@@ -57,14 +63,14 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="nationality">
-							{nationality}
+							{form.nationality}
 						</p>
 					</div>
 				</div>
 				<div className="row form-output my-4">
 					<div className="col my-3">
 						<p className="form-data fst-italic" id="message">
-							{message}
+							{form.message}
 						</p>
 					</div>
 				</div>
@@ -78,8 +84,8 @@ function ReviewMessage() {
 					<h4>We will be in touch with you shortly.</h4>
 					<button
 						type="button"
-						onClick={() => {
-							navigate("/");
+						onClick={(e) => {
+							handleClose(e);
 						}}
 						className="btn text-white px-4 mt-2 rounded-pill"
 						style={{ backgroundColor: "#f47522" }}

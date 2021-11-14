@@ -1,6 +1,8 @@
 import { React, useState } from 'react'
 import { useNavigate } from 'react-router'
 import styles from './Form.module.css'
+import { useDispatch } from 'react-redux';
+import { passData } from '../../Redux/reducer';
 
 function Form() {
     const navigate = useNavigate();
@@ -17,6 +19,8 @@ function Form() {
 		phone: "",
 		nationality: "",
 	};
+
+	const dispatch = useDispatch();
 
 	const [data, setData] = useState(baseData);
 	const [errorMessage, setErrorMessage] = useState(baseError);
@@ -110,9 +114,15 @@ function Form() {
 		if (validField.length < 4) {
 			validateOnSubmit();
 		} else {
-			for (let key in data) {
-				localStorage.setItem(`${key}`, JSON.stringify(data[key]));
+			const newData = {
+				nama: data.nama,
+				email: data.email,
+				phone: data.phone,
+				nationality: data.nationality,
+				message: data.message,
+				passed : true,
 			}
+			dispatch(passData(newData));
 			navigate("/review_message");
 		}
 	};
