@@ -18,13 +18,13 @@ function Home() {
 								src={profile}
 								alt="profile"
 								id="profile-image"
-								className="w-100 float-end mt-5 py-5 rounded-circle"
+								className="w-100 float-end mt-0 py-5 rounded-circle"
 							/>
 						</div>
 						<div
 							className="
 							col-10 col-sm-8 col-lg-7 col-xl-6
-							m-auto
+							my-auto
 							text-center text-md-start
 						"
 						>

@@ -6,7 +6,7 @@ import logo from '../../Assets/Images/logo-ALTA-v2@2x.png'
 
 function ContactUs() {
     return (
-        <div className="row row-cols-sm-1 row-cols-sm-2 w-100">
+        <div className="row row-cols-sm-1 row-cols-sm-2 w-100 h-100">
 			<div className={`${styles.sideimage} col-sm-5 col-md-5 p-0 position-relative`}>
 				<div className={`${styles.overlay} w-100 h-100 `} />
 				<img

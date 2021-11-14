@@ -1,6 +1,7 @@
 .sideimage {
     background-image: url("../../Assets/Images/charles-rRWiVQzLm7k-unsplash.jpg");
     background-size: cover;
+    /* height: 100vh; */
 }
 
 .left {
