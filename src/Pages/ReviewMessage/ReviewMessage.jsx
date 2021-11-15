@@ -27,7 +27,7 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="fullname">
-							{form.nama}
+							{form?.nama}
 						</p>
 					</div>
 				</div>
@@ -39,7 +39,7 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="email">
-							{form.email}
+							{form?.email}
 						</p>
 					</div>
 				</div>
@@ -51,7 +51,7 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="phone">
-							{form.phone}
+							{form?.phone}
 						</p>
 					</div>
 				</div>
@@ -63,14 +63,14 @@ function ReviewMessage() {
 					</div>
 					<div className="col">
 						<p className="mb-sm-0 mb-3 form-data" id="nationality">
-							{form.nationality}
+							{form?.nationality}
 						</p>
 					</div>
 				</div>
 				<div className="row form-output my-4">
 					<div className="col my-3">
 						<p className="form-data fst-italic" id="message">
-							{form.message}
+							{form?.message}
 						</p>
 					</div>
 				</div>

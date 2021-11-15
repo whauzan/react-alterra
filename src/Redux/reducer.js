@@ -8,6 +8,7 @@ export const sliceForm = createSlice({
     reducers: {
         passData: (state, action) => {
             state.forms = action.payload;
+            console.log('masuk nih');
         },
         deleteData: (state) => {
             state.forms = null;
