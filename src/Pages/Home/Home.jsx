@@ -2,15 +2,30 @@ import React from 'react'
 import { Navbar } from '../../Components'
 import styles from './Home.module.css'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 import profile from '../../Assets/Images/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg'
 
 function Home() {
+	const [time, setTime] = useState(moment().format("HH:mm:ss"));
+	useEffect(() => {
+		let isMounted = true;
+		setInterval(() => {
+			if (isMounted) {
+				setTime(moment().format("HH:mm:ss"));
+			}
+		}, 1000);
+		return () => {
+			isMounted = false;
+		};
+	}, []);
+
     return (
         <div className='Home'>
             <Navbar />
             <section className={`${styles.content} h-100`}>
-				{/* <div className="float-end p-2 fs-6 fw-bold">{time}</div> */}
+				<div className="float-end p-2 fs-6 fw-bold">{time}</div>
 				<div className="container m-auto">
 					<div className="row row-cols-sm-1 row-cols-md-2 pt-3">
 						<div className="col-8 col-sm-9 col-md-5 col-lg-5 col-xl-5 m-auto">
