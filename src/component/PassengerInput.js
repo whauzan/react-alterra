@@ -100,7 +100,7 @@ function PassengerInput(props) {
         </button>
       </div>
       <button className="inputan" onClick={handleBukaInput} style={editMode}>
-        Masukkan Nama Pelanggan
+        Masukkan Nama Pengunjung
       </button>
     </div>
   )
