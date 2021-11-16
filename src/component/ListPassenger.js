@@ -1,6 +1,7 @@
 import ListItem from './ListItem';
+
 const ListPassenger = props => {
-    
+    const {data, hapusPengunjung} = props;
     return (
         <div>
             <table cellPadding="5px" cellSpacing="0" style={{margin: "auto"}}>
@@ -10,13 +11,15 @@ const ListPassenger = props => {
                     <td>Jenis Kelamin</td>
                     <td bgcolor="white" className="removeBorder"></td>
                 </thead>
-                {props.data.map(item => (
-                    <ListItem
-                        key={item.id}
-                        data={item}
-                        hapusPengunjung={props.hapusPengunjung}
-                    />
-                ))}
+                <tbody>
+                    {data?.map((item, i) => (
+                        <ListItem
+                            key={i}
+                            data={item}
+                            // hapusPengunjung={hapusPengunjung}
+                        />
+                    ))}
+                </tbody>
             </table>
         </div>
     )

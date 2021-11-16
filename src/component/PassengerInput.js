@@ -1,7 +1,23 @@
 import { useState } from "react"
 import "./Home.css"
-
+// import { useMutation } from '@apollo/client'
+// import { INSERT_PASSENGER } from "../GraphQL/Mutation"
+ 
 function PassengerInput(props) {
+  // const [insertPassenger, {error}] = useMutation(INSERT_PASSENGER);
+  // const addPassenger = () => {
+  //   insertPassenger({
+  //     variables: {
+  //       nama: nama,
+  //       umur: umur,
+  //       jenisKelamin
+  //     }
+  //   })
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  // }
+
   const [state, setState] = useState({
     nama: "",
     umur: "",
