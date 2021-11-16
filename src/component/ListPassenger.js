@@ -12,11 +12,11 @@ const ListPassenger = props => {
                     <td bgcolor="white" className="removeBorder"></td>
                 </thead>
                 <tbody>
-                    {data?.map((item, i) => (
+                    {data?.map((item) => (
                         <ListItem
-                            key={i}
+                            key={item.id}
                             data={item}
-                            // hapusPengunjung={hapusPengunjung}
+                            hapusPengunjung={hapusPengunjung}
                         />
                     ))}
                 </tbody>

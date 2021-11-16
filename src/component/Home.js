@@ -3,12 +3,19 @@ import { v4 as uuidv4 } from "uuid";
 import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { LOAD_PASSENGERS, LOAD_PASSENGERS_LAZY } from '../GraphQL/Query';
+import { DELETE_PASSENGER, INSERT_PASSENGER } from "../GraphQL/Mutation";
 
 function Home() {
     // const { error, loading, data } = useQuery(LOAD_PASSENGERS);
     const [getPassengerStasiun, {error, loading, data}] = useLazyQuery(LOAD_PASSENGERS_LAZY);
+    const [deletePassenger, {loading: loadingDelete}] = useMutation(DELETE_PASSENGER, {
+        refetchQueries: [LOAD_PASSENGERS_LAZY]
+    });
+    const [insertPassenger, {loading: loadingInsert}] = useMutation(INSERT_PASSENGER, {
+        refetchQueries: [LOAD_PASSENGERS_LAZY]
+    });
 
     useEffect(() => {
         if (data) {
@@ -23,13 +30,19 @@ function Home() {
     const [dataPassenger, setDataPassenger] = useState([]);
     const [id_stasiun, setStasiunID] = useState({idStasiun: null});
 
-    const hapusPengunjung = (id) => {
-        setDataPassenger((oldData) => oldData.filter((item) => item.id !== id))
+    const hapusPengunjung = (idx) => {
+        deletePassenger({variables: {
+            id: idx
+        }})
     }
 
     const tambahPengunjung = (newUser) => {
-        const newPengunjung = {id : uuidv4(), ...newUser}
-        setDataPassenger((oldData) => [...oldData, newPengunjung])
+        insertPassenger({variables: {
+            nama: newUser.nama,
+            umur: newUser.umur,
+            jenisKelamin: newUser.jenisKelamin,
+            idStasiun: id_stasiun
+        }})
     }
 
     const onGetData = () => {
