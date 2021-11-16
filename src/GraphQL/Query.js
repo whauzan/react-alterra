@@ -14,6 +14,7 @@ export const LOAD_PASSENGERS = gql`
 export const LOAD_PASSENGERS_LAZY = gql`
     query GetPassenger($idStasiun: Int!) {
         passenger(where: {idStasiun: {_eq: $idStasiun}}) {
+            id
             nama
             jenisKelamin
             umur
