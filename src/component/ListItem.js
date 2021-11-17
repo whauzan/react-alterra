@@ -1,7 +1,9 @@
 import "./Home.css"
 
 const ListItem = (props) => {
-    const { id, nama, umur, jenisKelamin, hapusPengunjung } = props.data
+    const { id, nama, umur, jenisKelamin } = props.data;
+    const hapusPengunjung = props.hapusPengunjung;
+    console.log(hapusPengunjung);
 
     return (
         <tr>

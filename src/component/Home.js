@@ -25,7 +25,7 @@ function Home() {
             console.log("tes",error);
             return null
         }
-    }, [data])
+    }, [data, error])
 
     const [dataPassenger, setDataPassenger] = useState([]);
     const [id_stasiun, setStasiunID] = useState({idStasiun: null});
