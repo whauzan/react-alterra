@@ -15,3 +15,11 @@ export const DELETE_PASSENGER = gql`
     }
   }
 `
+
+export const UPDATE_PASSENGER = gql`
+  mutation UpdatePassenger($id: uuid!, $jenisKelamin: String!, $nama: String!, $umur: Int!) {
+    update_passenger(where: {id: {_eq: $id}}, _set: {jenisKelamin: $jenisKelamin, nama: $nama, umur: $umur}) {
+      affected_rows
+    }
+  }
+`

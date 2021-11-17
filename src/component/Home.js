@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { LOAD_PASSENGERS, LOAD_PASSENGERS_LAZY } from '../GraphQL/Query';
-import { DELETE_PASSENGER, INSERT_PASSENGER } from "../GraphQL/Mutation";
+import { DELETE_PASSENGER, INSERT_PASSENGER, UPDATE_PASSENGER } from "../GraphQL/Mutation";
 
 function Home() {
     // const { error, loading, data } = useQuery(LOAD_PASSENGERS);
@@ -14,6 +13,9 @@ function Home() {
         refetchQueries: [LOAD_PASSENGERS_LAZY]
     });
     const [insertPassenger, {loading: loadingInsert}] = useMutation(INSERT_PASSENGER, {
+        refetchQueries: [LOAD_PASSENGERS_LAZY]
+    });
+    const [editPassenger, {loading: loadingEdit}] = useMutation(UPDATE_PASSENGER, {
         refetchQueries: [LOAD_PASSENGERS_LAZY]
     });
 
@@ -45,6 +47,16 @@ function Home() {
         }})
     }
 
+    const editPengunjung = (editUser) => {
+        // console.log(editUser);
+        editPassenger({variables: {
+            id: editUser.id,
+            nama: editUser.nama,
+            umur: editUser.umur,
+            jenisKelamin: editUser.jenisKelamin
+        }})
+    }
+
     const onGetData = () => {
         getPassengerStasiun({variables: {
             idStasiun: id_stasiun
@@ -64,7 +76,7 @@ function Home() {
             <input type="number" className="input-text" placeholder="ID Stasiun..." value={id_stasiun} onChange={onChangeStasiunID} />
             <button onClick={onGetData}>Get Data</button>
             {data? <h3>{`Stasiun ${data.passenger[0].stasiun.namaStasiun}`}</h3> : null}
-            {data? <ListPassenger data={dataPassenger} hapusPengunjung={hapusPengunjung}/> : null}
+            {data? <ListPassenger data={dataPassenger} hapusPengunjung={hapusPengunjung} editPengunjung={editPengunjung}/> : null}
             {data? <PassengerInput tambahPengunjung={tambahPengunjung}/> : null}
         </div>
     )

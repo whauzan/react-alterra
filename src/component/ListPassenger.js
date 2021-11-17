@@ -1,7 +1,7 @@
 import ListItem from './ListItem';
 
 const ListPassenger = props => {
-    const {data, hapusPengunjung} = props;
+    const {data, hapusPengunjung, editPengunjung} = props;
     return (
         <div>
             <table cellPadding="5px" cellSpacing="0" style={{margin: "auto"}}>
@@ -17,6 +17,7 @@ const ListPassenger = props => {
                             key={item.id}
                             data={item}
                             hapusPengunjung={hapusPengunjung}
+                            editPengunjung={editPengunjung}
                         />
                     ))}
                 </tbody>
