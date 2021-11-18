@@ -2,35 +2,42 @@ import { useEffect, useState } from "react";
 import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
-import { LOAD_PASSENGERS, LOAD_PASSENGERS_LAZY } from '../GraphQL/Query';
-import { DELETE_PASSENGER, INSERT_PASSENGER, UPDATE_PASSENGER } from "../GraphQL/Mutation";
+import useGetPassengerStasiun from "../Hooks/useGetPassengerStasiun";
+import useSubsPassenger from "../Hooks/useSubsPassenger";
+import useDeletePassenger from "../Hooks/useDeletePassenger";
+import useInsertPassenger from "../Hooks/useInsertPassenger";
+import useEditPassenger from "../Hooks/useEditPassenger";
 
 function Home() {
     // const { error, loading, data } = useQuery(LOAD_PASSENGERS);
-    const [getPassengerStasiun, {error, loading, data}] = useLazyQuery(LOAD_PASSENGERS_LAZY);
-    const [deletePassenger, {loading: loadingDelete}] = useMutation(DELETE_PASSENGER, {
-        refetchQueries: [LOAD_PASSENGERS_LAZY]
-    });
-    const [insertPassenger, {loading: loadingInsert}] = useMutation(INSERT_PASSENGER, {
-        refetchQueries: [LOAD_PASSENGERS_LAZY]
-    });
-    const [editPassenger, {loading: loadingEdit}] = useMutation(UPDATE_PASSENGER, {
-        refetchQueries: [LOAD_PASSENGERS_LAZY]
-    });
-
-    useEffect(() => {
-        if (data) {
-            setDataPassenger(data.passenger);
-        }
-        if (error) {
-            console.log("tes",error);
-            return null
-        }
-    }, [data, error])
-
+    
     const [dataPassenger, setDataPassenger] = useState([]);
     const [id_stasiun, setStasiunID] = useState({idStasiun: null});
+
+    const { getPassengerStasiun, errorPassengerStasiun, loadingPassengerStasiun, dataPassengerStasiun, subscribePassengerStasiun } = useGetPassengerStasiun();
+    const { dataSubsPassenger, loadingSubsPassenger, errorSubsPassenger } = useSubsPassenger(id_stasiun);
+    const { deletePassenger, loadingDelete } = useDeletePassenger();
+    const { insertPassenger, loadingInsert } = useInsertPassenger();
+    const { editPassenger, loadingEdit } = useEditPassenger();
+    // console.log(dataPassenger);
+
+    useEffect(() => {
+        if (dataPassengerStasiun) {
+            subscribePassengerStasiun();
+            setDataPassenger(dataPassengerStasiun?.passenger);
+            // console.log("tes 3", dataPassengerStasiun);
+        }
+        // if (dataSubsPassenger) {
+        //     // subscribePassengerStasiun();
+        //     setDataPassenger(dataSubsPassenger?.passenger);
+        //     console.log("tes 4", dataSubsPassenger);
+        // }
+        if (errorPassengerStasiun || errorSubsPassenger) {
+            console.log("error Subs",errorSubsPassenger);
+            console.log("error fetch", errorPassengerStasiun);
+            return null
+        }
+    }, [dataPassengerStasiun, errorPassengerStasiun, errorSubsPassenger])
 
     const hapusPengunjung = (idx) => {
         deletePassenger({variables: {
@@ -61,7 +68,7 @@ function Home() {
         getPassengerStasiun({variables: {
             idStasiun: id_stasiun
         }})
-        setDataPassenger(data?.passenger)
+        setDataPassenger(dataPassengerStasiun?.passenger)
     }
 
     const onChangeStasiunID = (e) => {
@@ -75,9 +82,9 @@ function Home() {
             <Header />
             <input type="number" className="input-text" placeholder="ID Stasiun..." value={id_stasiun} onChange={onChangeStasiunID} />
             <button onClick={onGetData}>Get Data</button>
-            {data? <h3>{`Stasiun ${data.passenger[0].stasiun.namaStasiun}`}</h3> : null}
-            {data? <ListPassenger data={dataPassenger} hapusPengunjung={hapusPengunjung} editPengunjung={editPengunjung}/> : null}
-            {data? <PassengerInput tambahPengunjung={tambahPengunjung}/> : null}
+            {dataPassengerStasiun? <h3>{`Stasiun ${dataPassengerStasiun.passenger[0].stasiun.namaStasiun}`}</h3> : null}
+            {dataPassengerStasiun? <ListPassenger data={dataPassenger} hapusPengunjung={hapusPengunjung} editPengunjung={editPengunjung}/> : null}
+            {dataPassengerStasiun? <PassengerInput tambahPengunjung={tambahPengunjung}/> : null}
         </div>
     )
 }

@@ -57,7 +57,12 @@ function PassengerEdit(props) {
     });
   };
 
-  let viewMode = {};
+  let viewMode = {
+    backgroundColor: "white",
+		position: "absolute",
+		padding: "10px",
+		zIndex: "2",
+  };
   let editMode = {};
 
   if (state.editing) {
@@ -67,7 +72,7 @@ function PassengerEdit(props) {
   }
 
   return (
-    <div style={{marginTop: '7px'}}>
+    <div>
       <div onSubmit={handleSubmit} style={viewMode}>
         <p>Masukkan Nama Anda</p>
         <input
@@ -101,7 +106,7 @@ function PassengerEdit(props) {
         </button>
       </div>
       <button className="inputan" onClick={handleBukaInput} style={editMode}>
-        Edit Pelanggan
+        Edit
       </button>
     </div>
   );
